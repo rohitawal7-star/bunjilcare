@@ -1,0 +1,245 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  --logo-green: #0077b6;
+  --logo-green-dark: #03045e;
+  --logo-green-soft: #caf0f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background: #ffffff;
+}
+
+.header-logo-mark {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  /* border: 1px solid #d1fae5; */
+  /* border-radius: 999px; */
+  background-color: #ffffff;
+  background-image: url("/images/bunjil-logo-transparent.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 170%;
+  box-shadow: 0 1px 2px rgba(0, 180, 216, 0.08);
+}
+
+.section-kicker {
+  color: var(--logo-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin-top: 1rem;
+  color: #0f172a;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.06;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--logo-green-dark);
+  font-weight: 800;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.55rem;
+  color: #334155;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid #dbe7e4;
+  border-radius: 1rem;
+  background: #ffffff;
+  padding: 0.95rem 1rem;
+  color: #0f172a;
+  font: inherit;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--logo-green);
+  box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.14);
+}
+
+.mission-section {
+  position: relative;
+}
+
+.mission-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(0, 119, 182, 0.08), transparent 36%),
+    radial-gradient(circle at 80% 18%, rgba(0, 119, 182, 0.12), transparent 30%);
+}
+
+.mission-watermark {
+  position: absolute;
+  right: -2rem;
+  top: -2rem;
+  z-index: 0;
+  width: min(44vw, 18rem);
+  aspect-ratio: 1;
+  background-image: url("/images/bunjil-logo-transparent.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.045;
+  transform: rotate(-7deg);
+}
+
+.mission-point {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5.25rem;
+  border: 1px solid rgba(0, 119, 182, 0.12);
+  border-left: 5px solid var(--logo-green);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 18px 42px rgba(3, 4, 94, 0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.mission-point:hover {
+  border-color: rgba(0, 119, 182, 0.28);
+  box-shadow: 0 22px 52px rgba(3, 4, 94, 0.12);
+  transform: translateY(-4px);
+}
+
+.mission-point-number {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: rgba(0, 119, 182, 0.1);
+  color: var(--logo-green);
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.animate-rise {
+  animation: rise 760ms ease both;
+}
+
+.animate-slide {
+  animation: slide 680ms ease both;
+}
+
+.animate-float {
+  animation: float 5.5s ease-in-out infinite;
+}
+
+.animate-soft-pulse {
+  animation: softPulse 3.8s ease-in-out infinite;
+}
+
+.animate-logo-glow {
+  animation: logoGlow 4.8s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 6px 22px rgba(0, 119, 182, 0.08);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(0, 119, 182, 0.18);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes logoGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 24px 34px rgba(0, 119, 182, 0.14));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 30px 46px rgba(0, 119, 182, 0.24));
+    transform: scale(1.018);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
