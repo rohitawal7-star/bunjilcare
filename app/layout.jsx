@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         {children}
 
         {/* Floating NDIS Logo */}
-        <div className="fixed lg:bottom-25 bottom-5 right-5 z-50">
+        <div className="fixed lg:bottom-25 bottom-20 right-5 z-50">
           <img
             src="/images/ndislogos.png"
             alt="NDIS"
