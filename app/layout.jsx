@@ -1,4 +1,6 @@
 import "./globals.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export const metadata = {
   title: "Bunjil Care Service | NDIS Provider in Perth, WA",
@@ -21,14 +23,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        {/* HEADER (ONLY ONCE) */}
+        <Header />
+
+        {/* PAGE CONTENT */}
+        <main>{children}</main>
+
+        {/* FOOTER */}
+        <Footer />
 
         {/* Floating NDIS Logo */}
-        <div className="fixed lg:bottom-25 bottom-20 right-5 z-50">
+        <div className="fixed bottom-20 right-5 z-50 lg:bottom-25">
           <img
             src="/images/ndislogos.png"
             alt="NDIS"
-            className="w-20 h-auto drop-shadow-lg"
+            className="h-auto w-20 drop-shadow-lg"
           />
         </div>
       </body>

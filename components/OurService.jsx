@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import {
   CheckCircleIcon,
   HeartIcon,
@@ -8,8 +9,11 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import ScrollReveal from "../components/ScrollReveal";
+
+
 const services = [
   {
+    slug: "assisted-living",
     title: "Assisted living",
     short: "Daily living support in a home that suits the participant.",
     detail:
@@ -17,6 +21,7 @@ const services = [
     icon: HomeModernIcon,
   },
   {
+    slug: "community-nursing",
     title: "Community Nursing",
     short:
       "Registered nurses delivering clinical care at home or in community.",
@@ -25,6 +30,7 @@ const services = [
     icon: HeartIcon,
   },
   {
+    slug: "support-coordination",
     title: "Support Coordination",
     short: "Plain-language help to understand and use your NDIS plan well.",
     detail:
@@ -32,6 +38,7 @@ const services = [
     icon: ShieldCheckIcon,
   },
   {
+    slug: "community-support",
     title: "Community Support",
     short: "Practical support to stay active and connected locally.",
     detail:
@@ -39,6 +46,7 @@ const services = [
     icon: UserGroupIcon,
   },
   {
+    slug: "mentoring-coaching",
     title: "Mentoring & Coaching",
     short: "Confidence, life skills and independence built step by step.",
     detail:
@@ -46,6 +54,7 @@ const services = [
     icon: SparklesIcon,
   },
   {
+    slug: "in-home-support",
     title: "In-Home Support",
     short: "Everyday help with personal care, meals and routines.",
     detail:
@@ -102,15 +111,29 @@ const OurService = () => {
                       activeService === index ? "ring-4 ring-sky-800/25" : ""
                     }`}
                   >
-                    <Icon className="h-9 w-9 text-[#0077b6]" />
+                    <Link
+  href={`/services/${service.slug}`}
+  className="block"
+>
+  <div
+    className={`min-h-[190px] rounded-2xl bg-white p-6 text-left shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+      activeService === index
+        ? "ring-4 ring-sky-800/25"
+        : ""
+    }`}
+    onMouseEnter={() => setActiveService(index)}
+  >
+    <Icon className="h-9 w-9 text-[#0077b6]" />
 
-                    <h3 className="mt-5 text-xl font-black text-slate-900">
-                      {service.title}
-                    </h3>
+    <h3 className="mt-5 text-xl font-black text-slate-900">
+      {service.title}
+    </h3>
 
-                    <p className="mt-3 text-sm leading-6 text-slate-500">
-                      {service.short}
-                    </p>
+    <p className="mt-3 text-sm leading-6 text-slate-500">
+      {service.short}
+    </p>
+  </div>
+</Link>
                   </button>
                 </ScrollReveal>
               );
@@ -139,4 +162,4 @@ const OurService = () => {
   );
 };
 
-export default OurService;
+export default OurService; 

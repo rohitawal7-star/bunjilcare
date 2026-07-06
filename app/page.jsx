@@ -12,14 +12,14 @@ import AboutUs from "../components/AboutUs";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      <Header />
+     
       <HomeBunjil />
       <AboutUs />
       <OurMission />
       <OurService />
       <OurCore />
       <Contact />
-      <Footer />
+    
     </main>
   );
 }
