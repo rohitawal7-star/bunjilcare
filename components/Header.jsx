@@ -5,15 +5,14 @@ import { Bars3Icon, PhoneIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const router = useRouter();
+  const pathname = usePathname();
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
-
-  const router = useRouter();
 
   // NAV ITEMS (ROUTES)
   const navItems = [
@@ -53,7 +52,6 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3">
@@ -78,15 +76,23 @@ const Header = () => {
 
         {/* DESKTOP NAV */}
         <nav className="hidden items-center gap-1 rounded-full border border-slate-100 bg-white px-2 py-2 shadow-sm lg:flex">
-          {navItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => handleNavClick(item.href)}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-sky-50 hover:text-sky-800"
-            >
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+
+            return (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item.href)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+                  active
+                    ? "bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-lg"
+                    : "text-slate-600 hover:bg-sky-50 hover:text-sky-800"
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* RIGHT SIDE */}
@@ -136,15 +142,23 @@ const Header = () => {
           className="relative z-50 border-t bg-white px-4 py-4 lg:hidden"
         >
           <div className="grid gap-2">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleNavClick(item.href)}
-                className="rounded-xl px-4 py-3 text-left text-sm font-bold text-slate-700 hover:bg-sky-50"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const active = pathname === item.href;
+
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`rounded-xl px-4 py-3 text-left text-sm font-bold transition-all duration-300 ${
+                    active
+                      ? "bg-sky-100 text-sky-800"
+                      : "text-slate-700 hover:bg-sky-50"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
         </nav>
       )}

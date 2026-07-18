@@ -38,14 +38,14 @@ const HomeBunjil = () => {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                href="#contact"
+                href="contactus"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#0077b6] px-7 py-4 text-sm font-black uppercase tracking-wide text-white shadow-xl shadow-[#0077b6]/20 transition hover:-translate-y-1 hover:bg-[#03045e]"
               >
                 Contact Us
                 <ArrowRightIcon className="h-4 w-4 transition group-hover:translate-x-1" />
               </a>
               <a
-                href="#services"
+                href="/ourservices"
                 className="inline-flex items-center justify-center rounded-full border border-[#0077b6]/20 bg-white px-7 py-4 text-sm font-black uppercase tracking-wide text-[#0077b6] transition hover:-translate-y-1 hover:border-[#0077b6]/50"
               >
                 View Services

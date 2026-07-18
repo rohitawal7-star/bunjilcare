@@ -1,17 +1,41 @@
 "use client";
+
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name is too long"),
+
+  phone: z
+    .string()
+    .regex(/^(\+61|0)[2-9]\d{8}$/, "Enter a valid Australian phone number"),
+
+  email: z.string().email("Enter a valid email address"),
+
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(500, "Message cannot exceed 500 characters"),
+});
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,9 +53,7 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (data) => {
     setLoading(true);
 
     try {
@@ -40,27 +62,25 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
 
       if (result.success) {
-        setPopupMessage("Message sent successfully! Our Team will contact you soon. Thank you");
+        setPopupMessage(
+          "Message sent successfully! Our Team will contact you soon.",
+        );
+
         setShowPopup(true);
 
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          message: "",
-        });
+        reset();
       } else {
         setPopupMessage("Failed to send message.");
         setShowPopup(true);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       setPopupMessage("Something went wrong.");
       setShowPopup(true);
     }
@@ -71,7 +91,6 @@ const Contact = () => {
   return (
     <section id="contact" className="scroll-mt-28 bg-white py-20">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.85fr_1fr] lg:px-6">
-        
         {/* LEFT SIDE */}
         <div>
           <p className="section-kicker">Contact Us</p>
@@ -109,7 +128,7 @@ const Contact = () => {
 
         {/* FORM */}
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="grid gap-4 rounded-3xl border border-slate-100 bg-[#f7fbfa] p-5 shadow-sm sm:p-8"
         >
           <div className="grid gap-4 sm:grid-cols-2">
@@ -117,24 +136,34 @@ const Contact = () => {
               Name
               <input
                 type="text"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
                 placeholder="Your name"
+                {...register("name")}
+                className={`${
+                  errors.name ? "border-red-500 ring-1 ring-red-500" : ""
+                }`}
               />
+              {errors.name && (
+                <span className="mt-1 text-sm text-red-600">
+                  {errors.name.message}
+                </span>
+              )}
             </label>
 
             <label className="form-field">
               Contact Number
               <input
                 type="tel"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone number"
+                placeholder="0452 584 305"
+                {...register("phone")}
+                className={`${
+                  errors.phone ? "border-red-500 ring-1 ring-red-500" : ""
+                }`}
               />
+              {errors.phone && (
+                <span className="mt-1 text-sm text-red-600">
+                  {errors.phone.message}
+                </span>
+              )}
             </label>
           </div>
 
@@ -142,24 +171,34 @@ const Contact = () => {
             Email
             <input
               type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
               placeholder="you@example.com"
+              {...register("email")}
+              className={`${
+                errors.email ? "border-red-500 ring-1 ring-red-500" : ""
+              }`}
             />
+            {errors.email && (
+              <span className="mt-1 text-sm text-red-600">
+                {errors.email.message}
+              </span>
+            )}
           </label>
 
           <label className="form-field">
             Comment or Message
             <textarea
               rows={5}
-              name="message"
-              required
-              value={formData.message}
-              onChange={handleChange}
               placeholder="Tell us what support you are looking for"
+              {...register("message")}
+              className={`${
+                errors.message ? "border-red-500 ring-1 ring-red-500" : ""
+              }`}
             />
+            {errors.message && (
+              <span className="mt-1 text-sm text-red-600">
+                {errors.message.message}
+              </span>
+            )}
           </label>
 
           <button
@@ -176,7 +215,6 @@ const Contact = () => {
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="w-[90%] max-w-md rounded-2xl bg-white p-6 text-center shadow-xl">
-            
             <p className="mb-5 text-lg font-semibold text-slate-800">
               {popupMessage}
             </p>
