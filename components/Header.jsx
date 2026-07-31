@@ -106,7 +106,7 @@ const Header = () => {
           </a>
 
           <Link
-            href="/contact"
+            href="/contactus"
             className="rounded-full bg-[#0077b6] px-5 py-3 text-sm font-black uppercase text-white"
           >
             Enquire Now
