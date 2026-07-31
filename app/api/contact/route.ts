@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const { name, phone, email, message } = await req.json();
 
     await resend.emails.send({
-      from: "Bunjil Care <onboarding@resend.dev>", // We'll change this later
+      from: "bunjilcareservice.com.au", // We'll change this later
       to: "rohitawal7@gmail.com",
       replyTo: email,
       subject: `🩺 New Care Enquiry - ${name}`,
