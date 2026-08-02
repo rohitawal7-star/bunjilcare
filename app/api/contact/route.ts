@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Bunjil Care <enquiries@bunjilcareservice.com.au>",
-      to: "rohitawal7@gmail.com",
+      to: ["enquiries@bunjilcareservice.com.au"],
       replyTo: email,
       subject: `🩺 New Care Enquiry - ${name}`,
 
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
