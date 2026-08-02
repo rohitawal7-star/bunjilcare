@@ -46,7 +46,7 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex items-center gap-4">
             <a
-              href="https://www.facebook.com/rukesh.paun"
+              href="https://www.facebook.com/profile.php?id=61575136123855"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:scale-110 hover:bg-blue-500"
@@ -55,7 +55,7 @@ export default function Footer() {
               <FaFacebookF size={18} />
             </a>
 
-            <a
+            {/* <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,7 +83,7 @@ export default function Footer() {
               aria-label="X"
             >
               <FaXTwitter size={18} />
-            </a>
+            </a> */}
           </div>
         </div>
 
